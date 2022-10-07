@@ -1,0 +1,40 @@
+{
+  "name": "infostart2022-bff",
+  "version": "1.0.0",
+  "description": "BFF example for Infostart Event 2022",
+  "main": "app.js",
+  "type": "module",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
+  "scripts": {
+    "start": "npm run build && node ./dist/app.js",
+    "start:dev": "nodemon",
+    "build": "npm run clean && npm run compile",
+    "lint": "eslint src/ --ext .ts",
+    "compile": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "ts": "ts-node"
+  },
+  "keywords": [
+    "bff",
+    "nodejs",
+    "typescript",
+    "typegoose",
+    "mongoose"
+  ],
+  "author": "Igor Antonov",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.24.0",
+    "eslint-config-htmlacademy": "^5.1.2",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
