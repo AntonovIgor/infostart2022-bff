@@ -3,6 +3,8 @@ import {ILogger} from '../../core/logger/logger.interface.js';
 import {HttpMethod} from '../../core/types/http-method.enum.js';
 import {Request, Response} from 'express';
 import CreateUserDto from './create-user.dto.js';
+import got from 'got';
+import {USER_ENDPOINT} from './user.const.js';
 
 export default class UsersController extends Controller {
   constructor(protected logger: ILogger) {
@@ -22,12 +24,11 @@ export default class UsersController extends Controller {
   }
 
   public async index(_req: Request, res: Response) {
-    this.ok(res, [
-      {
-        email: 'user@notfound.ru',
-        password: '123456'
-      }
-    ]);
+    const users = await got
+      .get(`${USER_ENDPOINT}/users`)
+      .json<{email: string, password: string}[]>();
+
+    this.ok(res, users);
   }
 
   public async create(

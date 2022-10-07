@@ -11,6 +11,7 @@
   "scripts": {
     "start": "npm run build && node ./dist/app.js",
     "start:dev": "nodemon",
+    "start:mock": "json-server ./mocks/backend-data.json --port 31337",
     "build": "npm run clean && npm run compile",
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
@@ -33,6 +34,7 @@
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.24.0",
     "eslint-config-htmlacademy": "^5.1.2",
+    "json-server": "^0.17.0",
     "nodemon": "^2.0.20",
     "pino-pretty": "^9.1.1",
     "rimraf": "^3.0.2",
@@ -41,6 +43,7 @@
   },
   "dependencies": {
     "express": "^4.18.1",
+    "got": "^12.5.1",
     "pino": "^8.6.1"
   }
 }
