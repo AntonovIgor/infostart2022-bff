@@ -5,6 +5,7 @@ import {Request, Response} from 'express';
 import CreateUserDto from './create-user.dto.js';
 import got from 'got';
 import {USER_ENDPOINT} from './user.const.js';
+import ValidateDtoMiddleware from '../../core/middleware/validate-dto.middleware.js';
 
 export default class UsersController extends Controller {
   constructor(protected logger: ILogger) {
@@ -19,7 +20,10 @@ export default class UsersController extends Controller {
     this.addRoute({
       path: '/',
       method: HttpMethod.Post,
-      handler: this.create
+      handler: this.create,
+      middleware: [
+        new ValidateDtoMiddleware(CreateUserDto)
+      ]
     });
   }
 

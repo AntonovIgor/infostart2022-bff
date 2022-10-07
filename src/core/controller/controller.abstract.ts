@@ -11,7 +11,14 @@ export default abstract class Controller implements IController {
   }
 
   public addRoute(route: IRoute): void {
-    this._router[route.method](route.path, route.handler.bind(this));
+    const routeHandler = route.handler.bind(this);
+    const middlewares = route.middleware?.map(
+      (middleware) => middleware.execute.bind(middleware)
+    );
+
+    const handlers = middlewares ? [...middlewares, routeHandler] : routeHandler;
+
+    this._router[route.method](route.path, handlers);
     this.logger.info(`Add new route: ${route.method.toUpperCase()} ${route.path}`);
   }
 
