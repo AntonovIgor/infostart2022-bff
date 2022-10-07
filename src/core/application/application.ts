@@ -11,6 +11,10 @@ export class Application {
     this._logger = logger;
   }
 
+  public initMiddleware() {
+    this._expressApplication.use(express.json());
+  }
+
   public initRoutes() {
 
     this._expressApplication.get('/users', (_req: Request, res: Response) => {
@@ -19,14 +23,20 @@ export class Application {
         .json({message: 'Hello Infostart'});
       });
 
-    this._expressApplication.post('/users', (_req: Request, res: Response) => {
+    this._expressApplication.post('/users', (req: Request, res: Response) => {
       res
         .status(201)
-        .json({message: 'user created'});
+        .json({
+          message: 'user created',
+          data: req.body
+        });
     });
   }
 
   public async init() {
+    this.initMiddleware();
+    this._logger.info('Middleware registered…');
+
     this.initRoutes();
     this._logger.info('🤖 Routes registered…');
 
